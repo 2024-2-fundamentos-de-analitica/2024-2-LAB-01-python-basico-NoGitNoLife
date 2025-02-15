@@ -14,4 +14,26 @@ def pregunta_02():
     Rta/
     [('A', 8), ('B', 7), ('C', 5), ('D', 6), ('E', 14)]
 
+    #igual que anterior, pero ahora mirando la coumna correspondiente, agregar a un diccionario si no existe, agregar al contador si existe
+
     """
+
+    contador = {}
+
+    with open("files/input/data.csv", "r") as archivo:
+        lineas = archivo.readlines()
+
+    for linea in lineas:
+        letra = linea.split()[0]
+
+        if letra in contador:
+            contador[letra] += 1
+        else:
+            contador[letra] = 1
+
+    resultado = sorted(contador.items())
+    
+
+    return resultado
+
+print(pregunta_02())

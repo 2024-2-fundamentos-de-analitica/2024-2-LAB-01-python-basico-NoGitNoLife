@@ -26,3 +26,21 @@ def pregunta_04():
      ('12', 3)]
 
     """
+
+    contador_meses = {str(i).zfill(2): 0 for i in range(1, 13)}  
+
+    with open("files/input/data.csv", "r") as archivo:
+        lineas = archivo.readlines()
+
+        for linea in lineas:
+            columnas = linea.strip().split() 
+            fecha = columnas[2]  # Columna de la fecha en formato YYYY-MM-DD
+            mes = fecha.split('-')[1]  # Extraemos el mes
+
+            contador_meses[mes] += 1
+
+    resultado = sorted(contador_meses.items())
+
+    return resultado
+
+print(pregunta_04())

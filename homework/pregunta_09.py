@@ -24,3 +24,27 @@ def pregunta_09():
      'jjj': 18}}
 
     """
+
+    conteo_claves = {}
+
+    # Abrir el archivo y leer sus líneas
+    with open("files/input/data.csv", "r") as archivo:
+        lineas = archivo.readlines()
+
+        for linea in lineas:
+            columnas = linea.strip().split()  # Usamos espacio como delimitador
+            columna_5 = columnas[4]  # Columna 5 (el diccionario codificado)
+
+            for par in columna_5.split(','):
+                clave, _ = par.split(':')  # Extraemos solo la clave
+
+                if clave in conteo_claves:
+                    conteo_claves[clave] += 1
+                else:
+                    conteo_claves[clave] = 1
+
+    conteo_claves_ordenado = dict(sorted(conteo_claves.items()))
+
+    return conteo_claves_ordenado
+
+print(pregunta_09())

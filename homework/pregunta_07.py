@@ -25,3 +25,26 @@ def pregunta_07():
      (9, ['A', 'B', 'E', 'A', 'A', 'C'])]
 
     """
+
+    letras_por_valor = {}
+
+    with open("files/input/data.csv", "r") as archivo:
+        lineas = archivo.readlines()
+
+        for linea in lineas:
+            columnas = linea.strip().split()  # Usamos espacio como delimitador
+            letra = columnas[0]  # Columna 1 (letra)
+            valor = int(columnas[1])  # Columna 2 (valor, convertimos a entero)
+
+            if valor in letras_por_valor:
+                letras_por_valor[valor].append(letra)
+            else:
+                letras_por_valor[valor] = [letra]
+
+    resultado = [(valor, letras) for valor, letras in letras_por_valor.items()]
+
+    resultado.sort()
+
+    return resultado
+
+print(pregunta_07())

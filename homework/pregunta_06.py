@@ -26,3 +26,32 @@ def pregunta_06():
      ('jjj', 5, 17)]
 
     """
+
+    valores_claves = {}
+
+    with open("files/input/data.csv", "r") as archivo:
+        lineas = archivo.readlines()
+
+        for linea in lineas:
+            columnas = linea.strip().split()  # Usamos espacio como delimitador
+            columna_5 = columnas[4]  # La columna 5 contiene el diccionario codificado
+
+            diccionario = {}
+            for par in columna_5.split(','):
+                clave, valor = par.split(':')
+                diccionario[clave] = int(valor)  # Convertimos el valor a entero
+
+            for clave, valor in diccionario.items():
+                if clave not in valores_claves:
+                    valores_claves[clave] = [valor, valor]  # [minimo, maximo]
+                else:
+                    valores_claves[clave][0] = min(valores_claves[clave][0], valor)
+                    valores_claves[clave][1] = max(valores_claves[clave][1], valor)
+
+    resultado = [(clave, valores[0], valores[1]) for clave, valores in valores_claves.items()]
+
+    resultado.sort()
+
+    return resultado
+
+print(pregunta_06())
